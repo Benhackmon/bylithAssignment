@@ -9,7 +9,7 @@ export const router = createBrowserRouter(
       <Route path='products' element={
         <Container>
           <AppBar />
-          <Center sx={{ overflow: 'auto', padding: 0.5, height: 1, width: 1 }}>
+          <Center sx={{ overflow: 'auto', height: 1, width: 1 }}>
             <Outlet />
           </Center>
         </Container>

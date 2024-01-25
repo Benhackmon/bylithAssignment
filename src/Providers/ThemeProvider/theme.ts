@@ -9,5 +9,11 @@ export const theme = createTheme({
                 }
             }
         }
+    },
+    typography: {
+        allVariants: {
+            color: '#474747'
+        },
+        fontFamily: 'Poppins, sans-serif',
     }
 });
