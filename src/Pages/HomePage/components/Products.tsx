@@ -1,18 +1,16 @@
 import { Grid, Pagination } from '@mui/material';
 import { Center, FullRow } from '../../../Layout';
-import Product from './Product';
-import { data as products } from './products.json';
+import { data as products } from '../../../api/products.json';
+import ProductCard from './ProductCard';
 
 const Products = () => (
     <Center sx={{ flexDirection: 'column', padding: 1 }}>
         <Grid container spacing={1}>
-            {products?.map(product => <Product key={product.id} product={product} />)}
+            {products?.map(product => <ProductCard key={product.id} product={product} />)}
         </Grid>
-        <FullRow sx={{ padding: 3 }}>
+        <FullRow sx={{ padding: 2 }}>
             <Center sx={{ width: 1 }}>
-                <Pagination color='primary' count={5}>
-
-                </Pagination>
+                <Pagination color='primary' count={5} />
             </Center>
         </FullRow>
     </Center>

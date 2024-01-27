@@ -1,6 +1,7 @@
 import { Navigate, Outlet, Route, createBrowserRouter, createRoutesFromElements } from 'react-router-dom';
 import { Center, Container } from './Layout';
 import HomePage from './Pages/HomePage';
+import ProductPage from './Pages/ProductPage';
 import AppBar from './components/AppBar';
 
 export const router = createBrowserRouter(
@@ -15,7 +16,7 @@ export const router = createBrowserRouter(
         </Container>
       }>
         <Route index element={<HomePage />} />
-        <Route path=':id' element={<>Id</>} />
+        <Route path=':id' element={<ProductPage />} />
       </Route>
       <Route path='*' element={<Navigate to='products' />} />
     </>
