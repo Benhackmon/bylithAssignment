@@ -10,11 +10,11 @@ type ImageDisplayProps = {
 }
 
 const ImageDisplay = ({ images, imageNumber, paginateToPage }: ImageDisplayProps) => (
-    <FullColumn sx={{ flex: 4 }}>
+    <FullColumn sx={{ flex: 3, padding: 2 }}>
         <Center sx={{ flex: 9 }}>
             <img src={imager(images[imageNumber].url)}
                 style={{
-                    height: '100%', width: '50%'
+                    height: '100%', maxHeight: 600, width: '50%', maxWidth: 300
                 }}
                 alt={images[imageNumber].title} />
         </Center>
