@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Center } from '../../Layout';
 import { data as product } from '../../api/product.json';
@@ -10,11 +10,16 @@ const ProductPage = () => {
     const { id = '' } = useParams();
     // const getProductQuery(id)
     const [imageNumber, setImageNumber] = useState(0);
+    const [availableVariants, setAvailableVariants] = useState(product.variants)
     const { breakpoints: { up, down } } = useTheme();
 
     const paginateToPage = (page: number) => {
         setImageNumber(page - 1);
     };
+
+    useEffect(() => {
+        imageNumber !== 0 && setImageNumber(0)
+    }, [availableVariants])
 
     return (
         <Center sx={{
@@ -26,8 +31,8 @@ const ProductPage = () => {
                 flexDirection: 'column'
             }
         }}>
-            <ImageDisplay {...{ images: product.images, imageNumber, paginateToPage }} />
-            <ProductDetails {...{ product }} />
+            <ImageDisplay {...{ images: product.images, imageNumber, paginateToPage, availableVariants }} />
+            <ProductDetails {...{ product }} setAvailableVariants={setAvailableVariants} />
         </Center>
     );
 };

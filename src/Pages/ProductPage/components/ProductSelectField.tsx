@@ -12,21 +12,26 @@ type ProductSelectFieldProps = {
     onDelete: (attrId: string) => void
 }
 
-const ProductSelectField = ({ attr: { title, type, id }, value, onChange, availableOptions, onDelete }: ProductSelectFieldProps) => (
-    <TextField size='small' label={title} select fullWidth value={value} onChange={onChange}
-        InputProps={{ endAdornment: <IconButton onClick={() => onDelete(id)} sx={{ mr: 1 }}><Close fontSize='small' /></IconButton> }}
-    >
-        {availableOptions.map(label => (
-            <MenuItem key={label.id} value={label.id}>
-                <Row>
-                    <Typography>{label.title}</Typography>
-                    {type === 'COLOR' && (
-                        <Box sx={{ height: 20, width: 20, borderRadius: '50%', backgroundColor: label.data, ml: 1 }} />
-                    )}
-                </Row>
-            </MenuItem>
-        ))}
-    </TextField>
-);
+const ProductSelectField = ({ attr: { title, type, id }, value, onChange, availableOptions, onDelete }: ProductSelectFieldProps) => {
+    const hasSingleOption = availableOptions.length === 1;
+    const singleOptionValue = hasSingleOption ? availableOptions[0].id : '';
+
+    return (
+        <TextField size='small' label={title} select fullWidth value={hasSingleOption ? singleOptionValue : value} onChange={onChange}
+            InputProps={{ endAdornment: <IconButton onClick={() => onDelete(id)} sx={{ mr: 1 }}><Close fontSize='small' /></IconButton> }}
+        >
+            {availableOptions.map(label => (
+                <MenuItem key={label.id} value={label.id}>
+                    <Row>
+                        <Typography>{label.title}</Typography>
+                        {type === 'COLOR' && (
+                            <Box sx={{ height: 20, width: 20, borderRadius: '50%', backgroundColor: label.data, ml: 1 }} />
+                        )}
+                    </Row>
+                </MenuItem>
+            ))}
+        </TextField>
+    );
+}
 
 export default ProductSelectField;

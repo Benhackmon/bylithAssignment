@@ -1,6 +1,6 @@
 import { Button, Typography, useTheme } from '@mui/material';
-import { useState } from 'react';
-import { includes, isEmpty, some } from 'lodash';
+import { includes } from 'lodash';
+import { useEffect, useState } from 'react';
 import { FullColumn, Row } from '../../../Layout';
 import { data as product } from '../../../api/product.json';
 import Amount from './Amount';
@@ -8,28 +8,22 @@ import ProductSelectField from './ProductSelectField';
 
 type ProductDetailsProps = {
     product: typeof product
+    setAvailableVariants: React.Dispatch<React.SetStateAction<typeof product.variants>>
 }
 
-// const getProductVarientByLabelId = (productsVariant: typeof product.variants, attrID: string, labelId: string) =>
-//     productsVariant.filter(x => x.labels.some(x => x.label_id === labelId && x.attribute_id === attrID))
-
-// const getLableIdsByAttributeId = (productsVariant: typeof product.variants, attrId: string) =>
-//     productsVariant.map(({ labels }) => labels.find(x => x.attribute_id === attrId)?.label_id)
-
-// const productsVariant = getProductVarientByLabelId(product.variants, '1', '4')
-// const labelIds = getLableIdsByAttributeId(productsVariant, '2')
-// console.log(productsVariant, labelIds)
-
-// console.log(product.attributes.find(x => x.id === '2')?.labels.filter(label => labelIds.includes(label.id)))
-
-// console.table(product.attributes)
-// console.table(product.variants.map(({ id, labels, title }) => ({ id, labels, title })));
-
-const ProductDetails = ({ product }: ProductDetailsProps) => {
+const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) => {
     const { breakpoints: { down } } = useTheme();
     const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
-    console.log(selectedAttributes);
-    console.log(product.variants);
+
+    const getAvailableVariants = (variants: typeof product.variants) => variants.filter(variant => (Object.entries(selectedAttributes)
+        .map(([attribute_id, label_id]) => ({ attribute_id, label_id })))
+        .every(val => includes(variant.labels.map(x => x.label_id), val.label_id)))
+
+
+    const getAvailableVariantsByLabel = (label: { id: string }) => getAvailableVariants(product.variants).some(x => x.labels.some(x => x.label_id === label.id));
+
+    const getAvailableOptions = (attributeId: string) => product.attributes.find((attribute) => attribute.id === attributeId)
+        ?.labels.filter(label => getAvailableVariantsByLabel(label));
 
     const handleAttributeChange = (attributeId: string, labelId: string) => {
         setSelectedAttributes((prevSelected) => ({
@@ -40,27 +34,18 @@ const ProductDetails = ({ product }: ProductDetailsProps) => {
 
     const deleteAttribute = (attributeId: string) => {
         setSelectedAttributes((prevSelected) => {
-            const attributesCopy = { ...prevSelected }
-            delete attributesCopy[attributeId]
-            return attributesCopy
+            const attributesCopy = { ...prevSelected };
+
+            delete attributesCopy[attributeId];
+
+            return attributesCopy;
         }
         );
     };
 
-    const getAvailableOptions = (attributeId: string) => {
-        console.log('---------------------------------------------------------------------------------');
-
-        const availableOptions = product.attributes.find((attribute) => attribute.id === attributeId)?.labels.filter(label => {
-            const availableVariants = product.variants.filter(variant => (Object.entries(selectedAttributes)
-                .map(([attribute_id, label_id]) => ({ attribute_id, label_id })))
-                .every(val => includes(variant.labels.map(x => x.label_id), val.label_id)))
-                .some(x => x.labels.some(x => x.label_id === label.id));
-
-            return isEmpty(selectedAttributes) ? label : availableVariants;
-        })
-
-        return availableOptions;
-    }
+    useEffect(() => {
+        setAvailableVariants(getAvailableVariants(product.variants))
+    }, [selectedAttributes])
 
     return (
         <FullColumn sx={{
