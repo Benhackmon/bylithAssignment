@@ -25,6 +25,10 @@ const AppBar = () => {
         isMobileView && closeMenu();
     };
 
+    const goToCart = () => {
+        navigate('/cart');
+    };
+
     return (
         <MuiAppBar position='sticky' sx={{ backgroundColor: 'transparent', boxShadow: 0 }}>
             <Toolbar>
@@ -50,7 +54,7 @@ const AppBar = () => {
                         </Row>
                         <Row>
                             {!isMobileView && <Button sx={{ color: '#474747' }} onClick={goToHome}>Home</Button>}
-                            <IconButton>
+                            <IconButton onClick={goToCart}>
                                 <Badge badgeContent={0} showZero color="error"
                                     sx={{ "& .MuiBadge-badge": { fontSize: 10 } }}
                                 >

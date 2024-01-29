@@ -1,0 +1,97 @@
+{
+    "type": 1,
+    "data": {
+        "items": [
+            {
+                "id": "63THA9,N",
+                "product_id": "1",
+                "product_list_price": "220.00",
+                "product_type": "Other",
+                "name": "Black Jeans 30W & 34L Cotton",
+                "quantity": 2,
+                "price": 120,
+                "total_price": 240,
+                "variant": {
+                    "id": "1",
+                    "title": "Black Jeans 30W & 34L Cotton",
+                    "english_title": "Black Jeans 30W & 34L Cotton",
+                    "image": {
+                        "title": "black.jpg",
+                        "url": "products/images/j8LSlwASms.jpg"
+                    },
+                    "sku": "1",
+                    "price": "120.00",
+                    "discount_price": null,
+                    "tab_content": [],
+                    "pre_order_expected_date": null,
+                    "max_purchase_limit": null,
+                    "labels": [],
+                    "metadata": [],
+                    "recommended_variants": []
+                }
+            },
+            {
+                "id": "lL741XvB",
+                "product_id": "1",
+                "product_list_price": "220.00",
+                "product_type": "Other",
+                "name": "Black Jeans 40W & 40L Silk",
+                "quantity": 1,
+                "price": 160,
+                "total_price": 160,
+                "variant": {
+                    "id": "3",
+                    "title": "Black Jeans 40W & 40L Silk",
+                    "english_title": "Black Jeans 40W & 40L Silk",
+                    "image": {
+                        "title": "black.jpg",
+                        "url": "products/images/j8LSlwASms.jpg"
+                    },
+                    "sku": "1",
+                    "price": "160.00",
+                    "discount_price": null,
+                    "tab_content": [],
+                    "pre_order_expected_date": null,
+                    "max_purchase_limit": null,
+                    "labels": [],
+                    "metadata": [],
+                    "recommended_variants": []
+                }
+            },
+            {
+                "id": "wb6eUkno",
+                "product_id": "1",
+                "product_list_price": "220.00",
+                "product_type": "Other",
+                "name": "Pink Jeans 38W & 40L Silk",
+                "quantity": 1,
+                "price": 160,
+                "total_price": 160,
+                "variant": {
+                    "id": "8",
+                    "title": "Pink Jeans 38W & 40L Silk",
+                    "english_title": "Pink Jeans 38W & 40L Silk",
+                    "image": {
+                        "title": "pink.jpg",
+                        "url": "products/images/ZUCqZ8gOxU.jpg"
+                    },
+                    "sku": "1",
+                    "price": "160.00",
+                    "discount_price": null,
+                    "tab_content": [],
+                    "pre_order_expected_date": null,
+                    "max_purchase_limit": null,
+                    "labels": [],
+                    "metadata": [],
+                    "recommended_variants": []
+                }
+            }
+        ],
+        "coupon": "",
+        "total_price": 560,
+        "price_before_discount": 560,
+        "messages": [],
+        "pre_order": null
+    },
+    "_mat": "h7AMSsz68UQk31dSnk1Hdqk5tWVK56P0ZZZNxohhT2k_"
+}

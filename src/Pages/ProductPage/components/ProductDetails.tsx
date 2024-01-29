@@ -3,8 +3,8 @@ import { includes } from 'lodash';
 import { useEffect, useState } from 'react';
 import { FullColumn, Row } from '../../../Layout';
 import { data as product } from '../../../api/product.json';
-import Amount from './Amount';
 import ProductSelectField from './ProductSelectField';
+import Quantity from '../../../components/Quantity';
 
 type ProductDetailsProps = {
     product: typeof product
@@ -55,9 +55,9 @@ const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) 
                 minHeight: 200,
                 flex: 8,
                 backgroundColor: 'white',
-                borderTopLeftRadius: 12,
-                borderTopRightRadius: 12,
-                boxShadow: '0px 0px 20px 0px rgba(0,0,0,0.3)'
+                borderTopLeftRadius: 24,
+                borderTopRightRadius: 24,
+                boxShadow: '0px 0px 15px 0px rgba(0,0,0,0.3)'
             }
         }}>
             <Row>
@@ -97,7 +97,7 @@ const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) 
             }
             <FullColumn sx={{ gap: 4 }}>
                 <Row>
-                    <Amount />
+                    <Quantity productQuantity={1} sx={{ gap: 2, borderRadius: 2, border: '1px solid #9F9F9F' }} />
                 </Row>
                 <Row sx={{ [down('sm')]: { justifyContent: 'center' } }}>
                     <Button

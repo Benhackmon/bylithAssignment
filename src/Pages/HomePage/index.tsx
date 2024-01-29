@@ -11,7 +11,7 @@ const HomePage = () => (
       </Center>
       <FullColumn sx={{ gap: 4 }}>
         <Center>
-          <Row sx={{ paddingBottom: 0.5, borderBottom: '2px #474747 solid' }}>
+          <Row sx={{ paddingBottom: 0.5, borderBottom: '2px solid #474747' }}>
             <Typography fontSize={30} fontWeight='bold'>Products</Typography>
           </Row>
         </Center>
