@@ -1,10 +1,10 @@
 import { Menu as MenuIcon } from '@mui/icons-material';
-import { Badge, Button, IconButton, AppBar as MuiAppBar, Toolbar, useTheme, useMediaQuery, Menu, MenuItem } from '@mui/material';
+import { Badge, Button, IconButton, Menu, MenuItem, AppBar as MuiAppBar, Toolbar, useMediaQuery, useTheme } from '@mui/material';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Center, FullRow, Row } from '../Layout';
 import { Cart } from '../assets/Cart.tsx';
 import Logo from '../assets/Logo.png';
-import { useState } from 'react';
 
 const AppBar = () => {
     const navigate = useNavigate();

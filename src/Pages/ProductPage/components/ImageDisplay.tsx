@@ -3,7 +3,6 @@ import { uniqBy } from 'lodash';
 import { Center, FullColumn } from '../../../Layout';
 import { data as product } from '../../../api/product.json';
 import { imager } from '../../../utils/image';
-import { useEffect } from 'react';
 
 type ImageDisplayProps = {
     images: typeof product.images

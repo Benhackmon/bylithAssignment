@@ -1,10 +1,10 @@
+import { useTheme } from '@mui/material';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Center } from '../../Layout';
 import { data as product } from '../../api/product.json';
 import ImageDisplay from './components/ImageDisplay';
 import ProductDetails from './components/ProductDetails';
-import { useTheme } from '@mui/material';
 
 const ProductPage = () => {
     const { id = '' } = useParams();
