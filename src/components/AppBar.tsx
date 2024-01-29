@@ -55,7 +55,7 @@ const AppBar = () => {
                         <Row>
                             {!isMobileView && <Button sx={{ color: '#474747' }} onClick={goToHome}>Home</Button>}
                             <IconButton onClick={goToCart}>
-                                <Badge badgeContent={0} showZero color="error"
+                                <Badge badgeContent={3} showZero color="error"
                                     sx={{ "& .MuiBadge-badge": { fontSize: 10 } }}
                                 >
                                     <Cart />

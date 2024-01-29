@@ -16,6 +16,7 @@ export const router = createBrowserRouter(
           </Center>
         </Container>
       }>
+        <Route index element={<Navigate to='products' />} />
         <Route path='cart' element={<CartPage />} />
         <Route path='products'>
           <Route index element={<HomePage />} />
