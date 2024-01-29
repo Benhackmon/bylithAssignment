@@ -26,7 +26,7 @@ const ImageDisplay = ({ imageNumber, paginateToPage, availableVariants }: ImageD
                     alt={images[imageNumber]?.title} />
             </Center>
             <Center sx={{ flex: 1 }}>
-                <Pagination count={images.length} variant='outlined' key={imageNumber}
+                <Pagination count={images.length} variant='outlined' key={availableVariants[0].id}
                     hideNextButton hidePrevButton onChange={(_, page) => paginateToPage(page)}
                     renderItem={(item) => <PaginationItem {...item}
                         sx={{
