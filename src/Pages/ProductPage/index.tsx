@@ -18,7 +18,9 @@ const ProductPage = () => {
     };
 
     useEffect(() => {
-        imageNumber !== 0 && setImageNumber(0)
+        if (imageNumber !== 0) {
+            setImageNumber(0)
+        }
     }, [availableVariants])
 
     return (

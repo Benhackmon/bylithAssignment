@@ -14,11 +14,13 @@ type ProductDetailsProps = {
 const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) => {
     const { breakpoints: { down } } = useTheme();
     const [selectedAttributes, setSelectedAttributes] = useState<Record<string, string>>({});
+    const availableVariants = getAvailableVariants(product.variants);
 
-    const getAvailableVariants = (variants: typeof product.variants) => variants.filter(variant => (Object.entries(selectedAttributes)
-        .map(([attribute_id, label_id]) => ({ attribute_id, label_id })))
-        .every(val => includes(variant.labels.map(x => x.label_id), val.label_id)))
-
+    function getAvailableVariants(variants: typeof product.variants) {
+        return variants.filter(variant => (Object.entries(selectedAttributes)
+            .map(([attribute_id, label_id]) => ({ attribute_id, label_id })))
+            .every(val => includes(variant.labels.map(x => x.label_id), val.label_id)))
+    }
 
     const getAvailableVariantsByLabel = (label: { id: string }) => getAvailableVariants(product.variants).some(x => x.labels.some(x => x.label_id === label.id));
 
@@ -35,23 +37,22 @@ const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) 
     const deleteAttribute = (attributeId: string) => {
         setSelectedAttributes((prevSelected) => {
             const attributesCopy = { ...prevSelected };
-
             delete attributesCopy[attributeId];
 
             return attributesCopy;
-        }
-        );
+        });
     };
 
     useEffect(() => {
-        setAvailableVariants(getAvailableVariants(product.variants))
+        setAvailableVariants(availableVariants)
     }, [selectedAttributes])
 
     return (
         <FullColumn sx={{
-            flex: 2, gap: 1.5, padding: 3,
+            flex: 2, gap: 2, padding: 3,
             overflow: 'auto',
             [down('sm')]: {
+                minHeight: 200,
                 flex: 8,
                 backgroundColor: 'white',
                 borderTopLeftRadius: 12,
@@ -71,14 +72,19 @@ const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) 
                 <Typography sx={{ fontWeight: 'bold', color: '#474747', fontSize: 26 }}>{product.title}</Typography>
             </Row>
             <Row>
-                <Typography sx={{ fontWeight: 'bold', color: '#474747', fontSize: 20 }}>${Number(product.min_price)}</Typography>
+                <Typography sx={{ fontWeight: 'bold', color: '#474747', fontSize: 20 }}>${Number(availableVariants[0].price)}</Typography>
             </Row>
             <Row>
                 <Typography sx={{ color: '#9F9F9F', fontSize: 12 }}>{product.description}</Typography>
             </Row>
             {
                 product.attributes.map(attr =>
-                    <Row key={attr.id} sx={{ width: 0.5, minWidth: 150 }}>
+                    <Row key={attr.id} sx={{
+                        width: 0.5, minWidth: 150,
+                        [down('sm')]: {
+                            width: 1
+                        }
+                    }}>
                         <ProductSelectField
                             attr={attr}
                             value={selectedAttributes[attr.id] || ''}
@@ -89,12 +95,20 @@ const ProductDetails = ({ setAvailableVariants, product }: ProductDetailsProps) 
                     </Row>
                 )
             }
-            <Row>
-                <Amount />
-            </Row>
-            <Row>
-                <Button variant='contained' sx={{ borderRadius: 10, [down('sm')]: { width: 1 } }}>Add to Cart</Button>
-            </Row >
+            <FullColumn sx={{ gap: 4 }}>
+                <Row>
+                    <Amount />
+                </Row>
+                <Row sx={{ [down('sm')]: { justifyContent: 'center' } }}>
+                    <Button
+                        onClick={() => console.log('Add')}
+                        variant='contained'
+                        sx={{ borderRadius: 10, width: 130, [down('sm')]: { width: .9, fontSize: 20 }, backgroundColor: '#0068F5' }}
+                    >
+                        Add to Cart
+                    </Button>
+                </Row>
+            </FullColumn>
         </FullColumn >
     );
 };
